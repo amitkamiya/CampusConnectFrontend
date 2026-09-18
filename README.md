@@ -1,202 +1,375 @@
-\# 🎓 Campus Connect
+# 🎓 Campus Connect
 
+**Campus Connect** is a campus community platform that provides a centralized place for students, faculty, and administrators to interact with campus activities and information.
 
+The application includes secure authentication, a protected dashboard, campus events, Lost & Found management, recent activities, notifications, and campus statistics.
 
-> A centralized campus community platform that connects students, faculty, and administrators through events, lost \& found, campus activities, and real-time campus information.
+---
 
+## 🚀 Features
 
+### 🔐 Authentication
 
-\*\*Campus Connect\*\* is a full-featured React frontend designed to provide a single platform for managing and accessing common campus activities. It communicates with a REST API backend using Axios and provides secure JWT-based authentication with protected routes.
+* User registration and login
+* Role-based registration
+
+  * Student
+  * Faculty
+  * Admin
+* JWT-based authentication
+* Protected routes
+* Token-based API authorization
+* Automatic logout on `401 Unauthorized` responses
+
+### 📊 Dashboard
+
+* Centralized campus dashboard
+* Campus statistics
+* Recent activities
+* Quick actions
+* Events
+* Lost & Found
+* Notifications
+* Logout functionality
+
+### 📅 Campus Events
+
+* View campus events
+* Create events
+* Delete events
+* Event title and description
+
+### 🔎 Lost & Found
+
+* View lost items
+* View found items
+* Report lost items
+* Report found items
+* Filter Lost and Found records
+* Store item details including:
+
+  * Title
+  * Description
+  * Location
+  * Type
+  * Reporter
+  * Creation date
+
+### 📈 Campus Statistics
+
+The dashboard displays campus statistics such as:
+
+* Enrolled students
+* Online users
+* Total events
+* Lost & Found records
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* **React 19**
+* **JavaScript (ES6+)**
+* **React Router DOM 7**
+* **Vite 7**
+* **Axios**
+
+### UI & Styling
+
+* **Tailwind CSS**
+* **Bootstrap 5**
+* **Bootstrap Icons**
+* Custom CSS
+
+### Development Tools
+
+* **ESLint**
+* **Git**
+* **GitHub**
+* **npm**
+
+---
+
+## 🏗️ Application Architecture
+
+```text
+                        ┌───────────────┐
+                        │     User      │
+                        └───────┬───────┘
+                                │
+                                ▼
+                     ┌────────────────────┐
+                     │   React Frontend   │
+                     │                    │
+                     │ Landing Page       │
+                     │ Login / Register   │
+                     │ Dashboard          │
+                     └─────────┬──────────┘
+                               │
+                               ▼
+                     ┌────────────────────┐
+                     │   React Router     │
+                     │  Protected Routes  │
+                     └─────────┬──────────┘
+                               │
+                               ▼
+                     ┌────────────────────┐
+                     │   Axios API Layer  │
+                     │                    │
+                     │ JWT Authorization  │
+                     │ Request Interceptor│
+                     │ Response Interceptor
+                     └─────────┬──────────┘
+                               │
+                               ▼
+                     ┌────────────────────┐
+                     │    REST API        │
+                     │     Backend        │
+                     └────────────────────┘
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+CampusConnectFrontend/
+│
+├── public/
+│
+├── src/
+│   ├── api/
+│   │   └── axiosConfig.js
+│   │
+│   ├── assets/
+│   │
+│   ├── Components/
+│   │   └── ProtectedRoute.jsx
+│   │
+│   ├── pages/
+│   │   ├── Dashboard.jsx
+│   │   ├── LandingPage.jsx
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
+│   │
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── LICENSE
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## 🔗 Application Routes
+
+| Route        | Description       | Access    |
+| ------------ | ----------------- | --------- |
+| `/`          | Landing Page      | Public    |
+| `/login`     | User Login        | Public    |
+| `/register`  | User Registration | Public    |
+| `/dashboard` | Main Dashboard    | Protected |
+
+---
+
+## 🔌 API Integration
+
+The frontend communicates with the backend using **Axios** and REST APIs.
+
+### Authentication
+
+```http
+POST /api/auth/login
+POST /api/auth/register
+```
+
+### Events
+
+```http
+GET    /api/events
+POST   /api/events
+DELETE /api/events/:id
+```
+
+### Lost & Found
+
+```http
+GET  /api/lostfound
+POST /api/lostfound
+```
+
+### Campus Statistics
+
+```http
+GET /api/user/enrolled-count
+```
+
+---
+
+## 🔑 Authentication Flow
+
+```text
+User
+ │
+ ▼
+Login / Register
+ │
+ ▼
+Backend Authentication
+ │
+ ▼
+JWT Token
+ │
+ ▼
+Browser Storage
+ │
+ ▼
+ProtectedRoute
+ │
+ ▼
+Dashboard
+```
+
+For authenticated API requests, the JWT token is sent using:
+
+```http
+Authorization: Bearer <JWT_TOKEN>
+```
+
+Axios interceptors are used to manage authentication headers and handle unauthorized responses.
+
+When the backend returns a `401 Unauthorized` response, the authentication state is cleared and the user is redirected to the login page.
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* Node.js
+* npm
+* Git
+* Campus Connect Backend API
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/amitkamiya/CampusConnectFrontend.git
+```
 
+### 2. Navigate to the Project
 
+```bash
+cd CampusConnectFrontend
+```
 
-\---
+### 3. Install Dependencies
 
+```bash
+npm install
+```
 
+### 4. Configure Environment Variables
 
-\## ✨ Features
+Create a `.env` file in the project root:
 
+```env
+VITE_API_URL=http://localhost:8080
+```
 
+Make sure the Campus Connect backend is running on the configured URL.
 
-\### 🔐 Authentication \& Authorization
+### 5. Start the Development Server
 
+```bash
+npm run dev
+```
 
+The application will be available at:
 
-\* User registration and login
+```text
+http://localhost:5173
+```
 
-\* Role-based registration:
+---
 
+## 📦 Available Scripts
 
+### Development
 
-&#x20; \* Student
+```bash
+npm run dev
+```
 
-&#x20; \* Faculty
+Starts the Vite development server.
 
-&#x20; \* Admin
+### Production Build
 
-\* JWT-based authentication
+```bash
+npm run build
+```
 
-\* Protected dashboard routes
+Creates an optimized production build.
 
-\* Automatic logout on unauthorized API responses
+### Preview
 
-\* Persistent authentication using browser storage
+```bash
+npm run preview
+```
 
+Runs the production build locally.
 
+### Lint
 
-\### 📊 Dashboard
+```bash
+npm run lint
+```
 
+Checks the project for ESLint issues.
 
+---
 
-\* Centralized campus dashboard
+## 🔮 Future Enhancements
 
-\* Campus statistics
+* Real-time notifications
+* Student-to-student messaging
+* User profile management
+* Event registration
+* Image upload for Lost & Found
+* Advanced search and filtering
+* Pagination
+* Course management
+* Campus library integration
+* Granular role-based permissions
 
-\* Recent activities
+---
 
-\* Quick actions
+## 👨‍💻 Author
 
-\* Campus events
+**Amit Kumar**
 
-\* Lost \& Found records
+Computer Science & Engineering Student
 
-\* Notifications
+[GitHub](https://github.com/amitkamiya)
 
-\* Logout functionality
+---
 
+## 📄 License
 
+This project is licensed under the **BSD 2-Clause License**.
 
-\### 📅 Campus Events
-
-
-
-\* View upcoming campus events
-
-\* Create new events
-
-\* Delete events
-
-\* Event title and description management
-
-
-
-\### 🔎 Lost \& Found
-
-
-
-\* View lost items
-
-\* View found items
-
-\* Report lost items
-
-\* Report found items
-
-\* Filter between Lost and Found records
-
-\* Track item details such as:
-
-
-
-&#x20; \* Title
-
-&#x20; \* Description
-
-&#x20; \* Location
-
-&#x20; \* Type
-
-&#x20; \* Reporter
-
-&#x20; \* Creation date
-
-
-
-\### 📈 Campus Statistics
-
-
-
-The dashboard provides campus-level information such as:
-
-
-
-\* Enrolled students
-
-\* Online users
-
-\* Total events
-
-\* Lost \& Found records
-
-
-
-\---
-
-
-
-\## 🖥️ Screenshots
-
-
-
-> Add screenshots of your application here.
-
-
-
-\### Landing Page
-
-
-
-!\[Landing Page](screenshots/landing-page.png)
-
-
-
-\### Login
-
-
-
-!\[Login](screenshots/login.png)
-
-
-
-\### Registration
-
-
-
-!\[Registration](screenshots/register.png)
-
-
-
-\### Dashboard
-
-
-
-!\[Dashboard](screenshots/dashboard.png)
-
-
-
-\### Lost \& Found
-
-
-
-!\[Lost and Found](screenshots/lost-found.png)
-
-
-
-\---
-
-
-
-\## 🛠️ Tech Stack
-
-
-
-| Technology   | Purpose     |
-
-| ------------ | ----------- |
-
-| \*\*React 19\*\* | Frontend UI |
-
-|              |             |
-
-
-
+See the [LICENSE](LICENSE) file for details.
