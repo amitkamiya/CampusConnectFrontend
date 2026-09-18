@@ -1,248 +1,320 @@
-Campus Connect is a React frontend for a campus community platform. It gives students, faculty, and admins a place to sign up, sign in, view a protected dashboard, manage campus events, and report lost or found items.
+\# 🎓 Campus Connect
 
 
 
-What This Project Is Made Of
+Campus Connect is a \*\*campus community platform\*\* designed to connect students, faculty, and administrators through a centralized web application.
 
-React 19 for building the user interface.
 
-Vite 7 for local development, hot module reload, and production builds.
 
-React Router DOM 7 for page routing and protected navigation.
+The platform provides secure authentication, a protected dashboard, campus events management, lost-and-found reporting, recent activities, and campus statistics.
 
-Axios for HTTP requests to the backend API.
 
-Tailwind CSS 3, custom CSS, and Bootstrap 5 for styling.
 
-Bootstrap Icons for interface icons.
+\## 🚀 Features
 
-ESLint 9 with React Hooks and React Refresh rules.
 
-Bootstrap CSS, Bootstrap Icons, Bootstrap JS, and the Inter font are loaded from CDNs in index.html.
 
+\### 🔐 Authentication
 
 
-What The Project Does
 
-The app is branded as Campus Connect, a campus community platform. It includes:
+\* User registration and login
 
+\* Role-based registration:
 
 
-A public landing page that explains the platform and links users to sign in or create an account.
 
-Login and registration pages with styled forms, loading states, validation, and error handling.
+&#x20; \* Student
 
-JWT-style authentication storage using localStorage.
+&#x20; \* Faculty
 
-Protected dashboard access through a ProtectedRoute component.
+&#x20; \* Admin
 
-Automatic redirect from protected pages to /login when no token exists.
+\* JWT-based authentication
 
-Automatic redirect from the landing page to /dashboard when a token already exists.
+\* Token storage using `localStorage`
 
-Axios request interceptor that adds Authorization: Bearer <token> to API requests.
+\* Protected routes for authenticated users
 
-Axios response interceptor that removes the token and redirects to /login on 401 Unauthorized.
+\* Automatic logout and redirect when a `401 Unauthorized` response is received
 
-A dashboard with quick-action cards, recent activities, event management, lost-and-found reporting, and campus stats.
 
-Pages And Routes
 
-/ renders the landing page.
+\### 🏠 Landing Page
 
-/login renders the login form.
 
-/register renders the registration form.
 
-/dashboard renders the protected dashboard.
+\* Responsive navigation
 
-Any unknown route redirects back to /.
+\* Platform introduction
 
-Main Features
+\* Hero section with call-to-action buttons
 
-Landing Page
+\* Campus platform statistics
 
-The landing page presents Campus Connect as a student campus platform. It includes:
+\* Feature highlights
 
+\* Authentication navigation
 
 
-Navigation with brand logo and auth links.
 
-Hero section with calls to action.
+\### 📊 Dashboard
 
-Platform statistics.
 
-Feature cards for peers, updates, academics, and campus events.
 
-Final call-to-action section.
+After authentication, users can access a protected dashboard containing:
 
-Authentication
 
-The login page sends credentials to:
 
+\* Quick actions
 
+\* Recent activities
 
-POST /auth/login
+\* Campus events
 
-On success, the returned token is saved in localStorage under:
+\* Lost \& found items
 
+\* Campus statistics
 
+\* Notifications
 
-token
+\* Logout functionality
 
-The registration page sends new user data to:
 
 
+\### 📅 Campus Events
 
-POST /auth/register
 
-Registration collects:
 
+Users can interact with campus events through the backend API:
 
 
-Full name.
 
-Username.
+\* View events
 
-Email.
+\* Create events
 
-Password.
+\* Delete events
 
-Confirm password.
 
-Role: STUDENT, FACULTY, or ADMIN.
 
-The registration form validates matching passwords and requires passwords to be at least 6 characters.
+Each event contains:
 
 
 
-Protected Dashboard
+\* Title
 
-The dashboard is available only when a token exists in localStorage. It includes:
+\* Description
 
 
 
-Sticky top navigation.
+\### 🔎 Lost \& Found
 
-Logout button.
 
-Notification icon.
 
-Quick action cards for courses, messages, events, and library.
+The platform provides a dedicated lost-and-found section where users can:
 
-Recent activity list.
 
-Event list with create and delete actions.
 
-Lost-and-found section with lost/found tabs and a reporting form.
+\* View lost items
 
-Campus statistics for enrolled students, online users, events, and lost-and-found items.
+\* View found items
 
-Events
+\* Report lost items
 
-The dashboard fetches, creates, and deletes events through the backend:
+\* Report found items
 
+\* Filter items using Lost and Found tabs
 
 
-GET /events
 
-POST /events
+Each report can contain:
 
-DELETE /events/:id
 
-Events use a title and description. New events are added to the visible list after a successful API response.
 
+\* Item title
 
+\* Description
 
-Lost And Found
+\* Location
 
-The dashboard fetches and reports lost/found items through:
+\* Type (`LOST` / `FOUND`)
 
+\* Reporter information
 
+\* Creation date
 
-GET /lostfound
 
-POST /lostfound
 
-Lost-and-found items include:
+\### 📈 Campus Statistics
 
 
 
-Type: LOST or FOUND.
+The dashboard displays campus-related statistics such as:
 
-Title.
 
-Description.
 
-Location.
+\* Enrolled students
 
-Reporter information when returned by the backend.
+\* Online users
 
-Created date when returned by the backend.
+\* Number of events
 
-The UI filters items into Lost Items and Found Items tabs.
+\* Lost-and-found records
 
 
 
-Campus Stats
+\---
 
-The dashboard fetches the enrolled student count from:
 
 
+\## 🛠️ Tech Stack
 
-GET /user/enrolled-count
 
-It also displays counts for events and lost-and-found records from the currently loaded dashboard data.
 
+\### Frontend
 
 
-API Configuration
 
-The Axios instance is defined in:
+\* \*\*React 19\*\*
 
+\* \*\*JavaScript (ES6+)\*\*
 
+\* \*\*React Router DOM 7\*\*
 
-src/api/axiosConfig.js
+\* \*\*Vite 7\*\*
 
-The API base URL is built from the VITE\_API\_URL environment variable:
+\* \*\*Axios\*\*
 
 
 
-${import.meta.env.VITE\_API\_URL}/api
+\### Styling
 
-Create a .env file for local development:
 
 
+\* \*\*Tailwind CSS 3\*\*
 
-VITE\_API\_URL=http://localhost:8080
+\* \*\*Bootstrap 5\*\*
 
-With that value, frontend requests go to:
+\* \*\*Bootstrap Icons\*\*
 
+\* Custom CSS
 
+\* Inter Font
 
-http://localhost:8080/api
 
-Project Structure
 
-.
+\### Development Tools
+
+
+
+\* \*\*ESLint 9\*\*
+
+\* \*\*Git\*\*
+
+\* \*\*GitHub\*\*
+
+\* \*\*npm\*\*
+
+
+
+\---
+
+
+
+\## 🏗️ Application Architecture
+
+
+
+The frontend follows a component-based React architecture:
+
+
+
+```text
+
+User
+
+&#x20; │
+
+&#x20; ▼
+
+React Frontend
+
+&#x20; │
+
+&#x20; ├── Landing Page
+
+&#x20; ├── Login / Register
+
+&#x20; └── Protected Dashboard
+
+&#x20;         │
+
+&#x20;         ├── Events
+
+&#x20;         ├── Lost \& Found
+
+&#x20;         ├── Activities
+
+&#x20;         └── Campus Statistics
+
+&#x20;         │
+
+&#x20;         ▼
+
+&#x20;    Axios API Layer
+
+&#x20;         │
+
+&#x20;         ▼
+
+&#x20;     Backend REST API
+
+```
+
+
+
+\---
+
+
+
+\## 📁 Project Structure
+
+
+
+```text
+
+CampusConnectFrontend/
+
+│
 
 ├── public/
 
 │   └── vite.svg
 
+│
+
 ├── src/
+
+│   │
 
 │   ├── api/
 
 │   │   └── axiosConfig.js
 
+│   │
+
 │   ├── assets/
 
 │   │   └── react.svg
 
+│   │
+
 │   ├── Components/
 
 │   │   └── ProtectedRoute.jsx
+
+│   │
 
 │   ├── pages/
 
@@ -254,6 +326,8 @@ Project Structure
 
 │   │   └── Register.jsx
 
+│   │
+
 │   ├── App.css
 
 │   ├── App.jsx
@@ -262,101 +336,563 @@ Project Structure
 
 │   └── main.jsx
 
+│
+
 ├── eslint.config.js
 
 ├── index.html
 
 ├── package.json
 
+├── package-lock.json
+
 ├── postcss.config.js
 
 ├── tailwind.config.js
 
-└── vite.config.js
+├── vite.config.js
 
-Important Files
+└── README.md
 
-src/main.jsx mounts the React app into the DOM.
-
-src/App.jsx defines all frontend routes.
-
-src/Components/ProtectedRoute.jsx protects authenticated pages.
-
-src/api/axiosConfig.js centralizes backend communication and token handling.
-
-src/pages/LandingPage.jsx contains the public homepage.
-
-src/pages/Login.jsx contains the sign-in flow.
-
-src/pages/Register.jsx contains the sign-up flow.
-
-src/pages/Dashboard.jsx contains events, lost-and-found, stats, and dashboard UI.
-
-src/index.css contains Tailwind imports and custom Campus Connect styles.
-
-index.html loads Bootstrap, Bootstrap Icons, Google Fonts, and the React entry script.
-
-Available Scripts
-
-Install dependencies:
+```
 
 
+
+\---
+
+
+
+\## 🔗 Application Routes
+
+
+
+| Route        | Description       | Access    |
+
+| ------------ | ----------------- | --------- |
+
+| `/`          | Landing Page      | Public    |
+
+| `/login`     | User Login        | Public    |
+
+| `/register`  | User Registration | Public    |
+
+| `/dashboard` | Main Dashboard    | Protected |
+
+
+
+Unknown routes automatically redirect to the landing page.
+
+
+
+\---
+
+
+
+\## 🔌 Backend API
+
+
+
+The frontend communicates with the backend using \*\*Axios\*\*.
+
+
+
+The API base URL is configured through the `VITE\_API\_URL` environment variable.
+
+
+
+\### Authentication
+
+
+
+```http
+
+POST /api/auth/login
+
+POST /api/auth/register
+
+```
+
+
+
+\### Events
+
+
+
+```http
+
+GET    /api/events
+
+POST   /api/events
+
+DELETE /api/events/:id
+
+```
+
+
+
+\### Lost \& Found
+
+
+
+```http
+
+GET  /api/lostfound
+
+POST /api/lostfound
+
+```
+
+
+
+\### Campus Statistics
+
+
+
+```http
+
+GET /api/user/enrolled-count
+
+```
+
+
+
+\---
+
+
+
+\## ⚙️ Getting Started
+
+
+
+\### Prerequisites
+
+
+
+Make sure you have the following installed:
+
+
+
+\* Node.js
+
+\* npm
+
+\* Git
+
+\* Running Campus Connect backend API
+
+
+
+\### 1. Clone the Repository
+
+
+
+```bash
+
+git clone https://github.com/amitkamiya/CampusConnectFrontend.git
+
+```
+
+
+
+\### 2. Navigate to the Project
+
+
+
+```bash
+
+cd CampusConnectFrontend
+
+```
+
+
+
+\### 3. Install Dependencies
+
+
+
+```bash
 
 npm install
 
-Start the development server:
+```
 
 
+
+\### 4. Configure Environment Variables
+
+
+
+Create a `.env` file in the project root:
+
+
+
+```env
+
+VITE\_API\_URL=http://localhost:8080
+
+```
+
+
+
+The frontend will then communicate with:
+
+
+
+```text
+
+http://localhost:8080/api
+
+```
+
+
+
+Make sure your backend is running on the configured URL.
+
+
+
+\### 5. Start the Development Server
+
+
+
+```bash
 
 npm run dev
 
-Build for production:
+```
 
 
+
+The Vite development server will provide a local URL, typically:
+
+
+
+```text
+
+http://localhost:5173
+
+```
+
+
+
+\---
+
+
+
+\## 📦 Available Scripts
+
+
+
+\### Development
+
+
+
+```bash
+
+npm run dev
+
+```
+
+
+
+Starts the Vite development server.
+
+
+
+\### Production Build
+
+
+
+```bash
 
 npm run build
 
-Preview the production build:
+```
 
 
+
+Creates an optimized production build.
+
+
+
+\### Preview Production Build
+
+
+
+```bash
 
 npm run preview
 
-Run linting:
+```
 
 
+
+Runs the production build locally.
+
+
+
+\### Lint
+
+
+
+```bash
 
 npm run lint
 
-Backend Requirements
-
-This frontend expects a backend API that supports:
+```
 
 
 
-User login.
-
-User registration.
-
-JWT or bearer-token authentication.
-
-Event listing, creation, and deletion.
-
-Lost-and-found listing and creation.
-
-Enrolled student count retrieval.
-
-The frontend expects authenticated API calls to accept an Authorization header in this format:
+Checks the project for ESLint issues.
 
 
+
+\---
+
+
+
+\## 🔑 Authentication Flow
+
+
+
+The application uses a token-based authentication flow:
+
+
+
+```text
+
+Login
+
+&#x20; │
+
+&#x20; ▼
+
+Backend Authentication
+
+&#x20; │
+
+&#x20; ▼
+
+JWT Token
+
+&#x20; │
+
+&#x20; ▼
+
+localStorage
+
+&#x20; │
+
+&#x20; ▼
+
+ProtectedRoute
+
+&#x20; │
+
+&#x20; ▼
+
+Dashboard
+
+```
+
+
+
+Axios automatically attaches the token to API requests:
+
+
+
+```http
 
 Authorization: Bearer <token>
 
-Notes
+```
 
-The dashboard currently uses some static UI data for recent activities, quick actions, notification count, and online-user count.
 
-The backend URL must be configured with VITE\_API\_URL; otherwise API requests will not have a valid base URL.
 
-The project contains some older commented-out code in page files, but the active app logic is the React code exported from each component.
+If the backend returns `401 Unauthorized`, the frontend clears the stored token and redirects the user to the login page.
+
+
+
+\---
+
+
+
+\## 🧩 Key Components
+
+
+
+\### `ProtectedRoute.jsx`
+
+
+
+Responsible for protecting authenticated routes.
+
+
+
+It checks whether a valid authentication token exists before allowing access to protected pages.
+
+
+
+\### `axiosConfig.js`
+
+
+
+Centralizes API communication and handles:
+
+
+
+\* API base URL
+
+\* Authorization headers
+
+\* Request interceptors
+
+\* Response interceptors
+
+\* Unauthorized responses
+
+
+
+\### `Dashboard.jsx`
+
+
+
+The main authenticated application interface containing:
+
+
+
+\* Events
+
+\* Lost \& Found
+
+\* Statistics
+
+\* Recent activities
+
+\* Quick actions
+
+
+
+\### `Login.jsx`
+
+
+
+Handles user authentication and stores the returned token.
+
+
+
+\### `Register.jsx`
+
+
+
+Provides account creation with:
+
+
+
+\* Full name
+
+\* Username
+
+\* Email
+
+\* Password
+
+\* Password confirmation
+
+\* User role
+
+
+
+\---
+
+
+
+\## 🔮 Future Improvements
+
+
+
+Potential improvements for future versions include:
+
+
+
+\* Real-time notifications
+
+\* Direct student-to-student messaging
+
+\* Course management
+
+\* Campus library integration
+
+\* Event registration
+
+\* Advanced search and filtering
+
+\* Profile management
+
+\* Role-based dashboard permissions
+
+\* Image upload for lost-and-found items
+
+\* Pagination for events and lost-and-found records
+
+\* Responsive mobile-first improvements
+
+
+
+\---
+
+
+
+\## 👨‍💻 Author
+
+
+
+\*\*Amit Kumar\*\*
+
+
+
+Computer Science \& Engineering Student
+
+
+
+GitHub: \[@amitkamiya](https://github.com/amitkamiya)
+
+
+
+\---
+
+
+
+\## 📄 License
+
+
+
+This project is licensed under the \*\*BSD 2-Clause License\*\*.
+
+
+
+See the `LICENSE` file for more information.
+
+
+
+```
+
+
+
+\### One important correction
+
+
+
+Your GitHub repository currently says the frontend expects a backend API and documents `VITE\_API\_URL` as the backend base URL. So \*\*don't write that this is a complete full-stack application\*\* in this frontend repository's README unless you also document/link the backend repository.
+
+
+
+Also, your current repo has only \*\*3 commits\*\*, so I would avoid adding fake sections such as "Contributors", "Production deployment", "CI/CD", or screenshots unless you actually have them.
+
+
+
+\[Your CampusConnectFrontend repository](https://github.com/amitkamiya/CampusConnectFrontend?utm\_source=chatgpt.com)
+
+```
+
+
 
